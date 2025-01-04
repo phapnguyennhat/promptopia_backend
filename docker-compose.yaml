@@ -1,0 +1,12 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres-container
+    env_file:
+      - docker.env
+    ports:
+      - "5433:5432"
+    volumes:
+      - /data/postgres:/data/postgres
