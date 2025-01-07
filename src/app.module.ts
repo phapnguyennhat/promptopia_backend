@@ -8,7 +8,11 @@ import { AuthorModule } from './modules/author/author.module';
 import LogsMiddleware from './utils/logs.middleware';
 import { APP_FILTER } from '@nestjs/core';
 import { AllExceptionsFilter } from '../all-exception.filter';
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { GoogleAuthModule } from './modules/google-auth/google-auth.module';
+import { StartupModule } from './modules/startup/startup.module';
+import { CloudinaryModule } from './modules/cloudinary/cloudinary.module';
+import { ImageModule } from './modules/image/image.module';
 
 @Module({
   imports: [
@@ -19,6 +23,10 @@ import { AuthModule } from './auth/auth.module';
     }),
     AuthorModule,
     AuthModule,
+    GoogleAuthModule,
+    StartupModule,
+    CloudinaryModule,
+    ImageModule,
   ],
   controllers: [AppController],
   providers: [AppService,

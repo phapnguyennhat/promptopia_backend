@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, OneToOne } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from "typeorm";
 import { BaseEntity } from "../../common/baseEntity";
 import { Image } from "./image.entity";
 import { Author } from "./author.entity";
@@ -8,14 +8,17 @@ export class StartUp extends BaseEntity{
   @Column()
   title: string
 
-  @Column()
+  @Column({default: 0})
   views: number
 
   @Column({type: 'text'})
-  desciptions: string
+  description: string
 
   @Column()
   category: string
+
+  @Column({type: 'text'})
+  pitch: string
 
   @Column()
   imageId: string
@@ -23,9 +26,10 @@ export class StartUp extends BaseEntity{
   @Column()
   authorId: string
 
-  @OneToOne(()=> Image )
+  @OneToOne(()=> Image, {eager: true} )
+  @JoinColumn()
   image: Image
 
-  @ManyToOne(()=> Author)
+  @ManyToOne(()=> Author, {eager: true})
   author: Author
 }
