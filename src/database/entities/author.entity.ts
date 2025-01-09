@@ -1,8 +1,9 @@
 import { extend } from "joi";
-import {  Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import {  Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { BaseEntity } from "../../common/baseEntity";
 import { Exclude } from "class-transformer";
 import { Image } from "./image.entity";
+import { StartUp } from "./startup.entity";
 
 
 export enum AuthBy {
@@ -44,7 +45,10 @@ export class Author extends BaseEntity {
   @Column( {enum:AuthBy, type: 'enum', default: AuthBy.LOCAL})
   authBy: AuthBy
 
-  @OneToOne(()=> Image, {nullable: true})
+  @OneToOne(()=> Image, {nullable: true, eager: true})
   @JoinColumn()
   avatar: Image
+
+  @OneToMany(()=>StartUp, (startup: StartUp)=>startup.author)
+  startups: StartUp[]
 }

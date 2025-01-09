@@ -9,5 +9,6 @@ import { ImageModule } from '../image/image.module';
   imports: [TypeOrmModule.forFeature([StartUp]), ImageModule],
   controllers: [StartupController],
   providers: [StartupService],
+  exports: [StartupService]
 })
 export class StartupModule {}

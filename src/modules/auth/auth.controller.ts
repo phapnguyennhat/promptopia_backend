@@ -15,7 +15,6 @@ import { AuthorService } from '../author/author.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import JwtAuthGuard from './guards/jwt-auth.guard';
 import JwtRefreshGuard from './guards/jwtRefresh.guard';
-import { Request } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -59,7 +58,8 @@ export class AuthController {
       accessTokenCookie.cookie,
       refreshTokenCookie.cookie,
     ]);
-    return { message: 'Đăng nhập thành công ' };
+    
+    return { accessTokenCookie, refreshTokenCookie };
   }
 
   @UseGuards(JwtRefreshGuard)
@@ -69,9 +69,6 @@ export class AuthController {
       await this.authService.getCookieWithJwtAccessToken(req.user.id);
 
     req.res.setHeader('Set-Cookie', accessTokenCookie.cookie);
-    return {
-      accessToken: accessTokenCookie.token,
-      accessTime: accessTokenCookie.accessTime,
-    };
+    return accessTokenCookie;
   }
 }

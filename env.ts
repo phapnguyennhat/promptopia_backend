@@ -19,5 +19,14 @@ export const validationSchema = Joi.object({
   FRONTEND_URL: Joi.string().required(),
   CLOUDINARY_NAME: Joi.string().required(),
   CLOUDINARY_API_KEY: Joi.string().required(),
-  CLOUDINARY_API_SECRET: Joi.string().required()
+  CLOUDINARY_API_SECRET: Joi.string().required(),
+
+  APIKEY: Joi.string().required(),
+  AUTHDOMAIN: Joi.string().required(),
+  PROJECTID: Joi.string().required(),
+  STORAGEBUCKET: Joi.string().required(),
+  MESSAGINGSENDERID: Joi.string().required(),
+  APPID: Joi.string().required(),
+  MEASUREMENTID: Joi.string().required(),
+  
 });

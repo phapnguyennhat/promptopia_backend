@@ -30,6 +30,6 @@ export class StartUp extends BaseEntity{
   @JoinColumn()
   image: Image
 
-  @ManyToOne(()=> Author, {eager: true})
+  @ManyToOne(()=> Author,(author: Author)=>author.startups )
   author: Author
 }

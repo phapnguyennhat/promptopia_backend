@@ -69,4 +69,6 @@ export class StartupController {
   update(@Param('id')id: string, @Body() updateStartupDto: UpdateStartupDto){
     return this.startupService.update(id, updateStartupDto)
   }
+
+ 
 }

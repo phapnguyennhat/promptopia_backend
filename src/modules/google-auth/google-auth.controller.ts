@@ -10,8 +10,7 @@ export class GoogleAuthController {
     const { accessTokenCookie, refreshTokenCookie } =
       await this.googleAuthService.authenticate(tokenVerifyDto.credential);
 
-    req.res.setHeader('Set-Cookie', [accessTokenCookie, refreshTokenCookie]);
-
-    return { message: 'Đăng nhập bằng google thành công' };
+    req.res.setHeader('Set-Cookie', [accessTokenCookie.cookie, refreshTokenCookie.cookie]);
+    return { accessTokenCookie, refreshTokenCookie};
   }
 }

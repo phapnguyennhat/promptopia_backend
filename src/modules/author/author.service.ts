@@ -33,6 +33,15 @@ export class AuthorService {
     return this.authorRepo.findOneBy({ id });
   }
 
+  async getAuthorByIdJoinStartup(id: string){
+    return this.authorRepo.findOne({
+      where: {id },
+      relations: {
+        startups: true
+      }
+    })
+  }
+
   async removeRefreshToken(authorId: string) {
     return this.authorRepo.update(authorId, {
       currentHashedRefreshToken: null,

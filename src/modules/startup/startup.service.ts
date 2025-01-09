@@ -25,7 +25,12 @@ export class StartupService {
 
   async search(query?: string) {
     if (!query) {
-      return this.startUpRepo.find();
+      return this.startUpRepo.find({
+        relations: {
+          author: true,
+          image: true
+        }
+      });
     }
 
     return this.startUpRepo
@@ -55,5 +60,14 @@ export class StartupService {
         'image.url'
       ])
       .getOne();
+  }
+
+  async getByAuthorId(authorId: string){
+    return this.startUpRepo.find({
+      where: {authorId},
+      relations: {
+        author: true
+      }
+    })
   }
 }

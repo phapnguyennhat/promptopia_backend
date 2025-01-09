@@ -11,7 +11,7 @@ export class GoogleAuthService {
   constructor(
     private readonly authorService: AuthorService,
     private readonly configService: ConfigService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
   ) {
     const clientId = this.configService.get('GOOGLE_AUTH_CLIENT_ID');
     const clientSecret = this.configService.get('GOOGLE_AUTH_CLIENT_SECRET');
@@ -57,16 +57,20 @@ export class GoogleAuthService {
     return {
       accessTokenCookie,
       refreshTokenCookie,
-      author    };
+      author,
+    };
   }
 
   async getCookiesForUser(author: Author) {
-    const { cookie: accessTokenCookie } =
+    const accessTokenCookie =
       await this.authService.getCookieWithJwtAccessToken(author.id);
-    const { cookie: refreshTokenCookie, token: refreshToken } =
+    const refreshTokenCookie =
       await this.authService.getCookieWithJwtRefreshToken(author.id);
 
-    await this.authService.setCurrentRefreshToken(refreshToken, author.id);
+    await this.authService.setCurrentRefreshToken(
+      refreshTokenCookie.token,
+      author.id,
+    );
 
     return {
       accessTokenCookie,
