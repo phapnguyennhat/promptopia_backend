@@ -5,11 +5,7 @@ import { v2 as cloudinary } from 'cloudinary';
 @Injectable()
 export class CloudinaryService {
   constructor(private readonly configService: ConfigService) {
-    console.log(
-      this.configService.get('CLOUDINARY_NAME'),
-      this.configService.get('CLOUDINARY_API_KEY'),
-      this.configService.get('CLOUDINARY_API_SECRET'),
-    );
+  
     cloudinary.config({
       cloud_name: this.configService.get('CLOUDINARY_NAME'),
       api_key: this.configService.get('CLOUDINARY_API_KEY'),

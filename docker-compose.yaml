@@ -1,12 +1,28 @@
-version: '3.9'
-
+version: '3'
 services:
   postgres:
-    image: postgres:latest
-    container_name: postgres-container
-    env_file:
-      - docker.env
-    ports:
-      - "5433:5432"
+    image: postgres
+    networks:
+      - postgres
     volumes:
       - /data/postgres:/data/postgres
+    env_file:
+      - docker.env 
+    ports:
+      - "5433:5432"
+  
+    
+  nestjs-api:
+    image: nestjs-api 
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres 
+    networks:
+      - postgres
+
+networks:
+  postgres:
+    driver: bridge
